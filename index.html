@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>AsyncIO + AIOHTTP</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
@@ -24,8 +24,61 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+                    <h1>AsyncIO + aiohttp</h1>
+                    <h4>Asynchronous Python</h4>
+                </section>
+                <section>
+                    <section>
+                        <h2>Paralelismo vs Concurrencia vs Asincronía</h2>
+                    </section>
+                    <section>
+                        <p><strong>Paralelismo</strong>: Un software que es capaz de ejecutar dos tareas físicamente al mismo tiempo,
+                        usando para ello los distintos cores que tenga la máquina.</p>
+                        <p><strong>Concurrencia</strong>: Un software que es capaz de ejercutar dos tareas virtualmente al mismo tiempo,
+                        haciendo uso del time-slicing del sistema operativo.</p>
+                        <p><strong>Asincronía</strong>: Un software que da la impresión de ser paralelo o concurrente pero solo 
+                        realiza un cambio de contexto en los momentos que desea atender otras peticiones.</p>
+                    </section>
+                </section>
+				<section>
+                    <section>
+                        <h2>¿Por qué la asincronía?</h2>
+                        <p>
+                        Hasta ahora teníamos <strong>multi-processing</strong> y <strong>multi-threading</strong>
+                        y nos ha ido bastante bien.
+                        </p>
+                    </section>
+                    <section>
+                        <h2>Problemas</h2>
+                        <ul>
+                            <li>Base de código más complejo</li>
+                            <li>Condiciones de carrera</li>
+                            <li>Dead-locks</li>
+                            <li>Inanición</li>
+                            <li>Cambios de contexto *</li>
+                        </ul>
+                        <p>
+                        La programación asíncrona ayuda a prevenir todos estos problemas, pero realmente fue diseñada
+                        para los cambios de contexto.
+                        </p>
+                    </section>
+                    <section data-background-image="https://media.giphy.com/media/3ohc0QpuLBMO4wOCgo/giphy.gif"></section>
+                    <section>
+                        <h2>Cambios de contexto</h2>
+                        <ul>
+                            <li><strong>multi-processing</strong>: No tenemos cambios de contexto.</li>
+                            <li><strong>multi-threading</strong>: Ejecución no determinista de un trozo de código.</li>
+                            <li><strong>asincronía</strong>: Ejecución determinista de un trozo de código.</li>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                    <h2>El ejemplo: El secretario</h2>
+                </section>
+                <section>
+                    <p>Vale, me encanta, ¿Pero como conseguimos eso?</p>
+                </section>
 			</div>
 		</div>
 
