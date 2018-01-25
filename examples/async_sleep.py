@@ -4,8 +4,8 @@ from datetime import datetime
 
 
 async def custom_sleep():
-    print('SLEEP', datetime.now())
-    time.sleep(1)
+    print('SLEEP {}\n'.format(datetime.now()))
+    await asyncio.sleep(1)
 
 
 async def factorial(name, number):

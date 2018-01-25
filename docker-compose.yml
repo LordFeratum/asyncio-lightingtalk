@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  examples:
+    command: adev runserver
+    build: ./examples
+    volumes:
+      - ./examples/:/app/:rw
+    environment:
+      - APP_DB_NAME=server
+      - APP_DB_USER=postgres
+      - APP_DB_PASSWORD=server_pwd
+      - APP_DB_HOST=postgres
+      - APP_DB_PORT=5432
+      - APP_COOKIE_SECRET=DvQvEu6xrgQYGT1Rw5eV9w0BQGHOtPE1632Qo1ygi8Y=
+      - AIO_APP_PATH=server/app/
+      - AIO_STATIC_PATH=server/static/
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    networks:
+      - example-net
+    ports:
+      - 127.0.0.1:8000:8000
+      - 127.0.0.1:8001:8001
+
+  postgres:
+    image: postgres:9.6-alpine
+    environment:
+      - POSTGRES_DB=server
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=server_pwd
+    volumes:
+      - /app/postgresql:/var/lib/postgresql:rw
+    networks:
+      - example-net
+
+networks:
+  example-net: {}

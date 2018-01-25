@@ -117,7 +117,101 @@
                 </section>
                 <section>
                     <h2>Synchronous Sleep</h2>
-                    <p> salmon </p>
+                    <pre><code data-trim>
+                        Task A: Compute factorial(2)  
+                        SLEEP 2018-01-25 22:44:56.207479  
+                        Task A: Compute factorial(3)  
+                        SLEEP 2018-01-25 22:44:57.210128  
+                        Task A: factorial(3) is 6
+
+                        Task B: Compute factorial(2)  
+                        SLEEP 2018-01-25 22:44:58.210778  
+                        Task B: Compute factorial(3)  
+                        SLEEP 2018-01-25 22:44:59.212510  
+                        Task B: Compute factorial(4)  
+                        SLEEP 2018-01-25 22:45:00.217308  
+                        Task B: factorial(4) is 24
+
+                        Total time: 5.016386032104492   
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Asynchronous Sleep</h2>
+                    <pre><code data-trim>
+                        import asyncio  
+                        import time  
+                        from datetime import datetime
+
+                        async def custom_sleep():  
+                            print('SLEEP {}\n'.format(datetime.now()))
+                            await asyncio.sleep(1)
+
+                        async def factorial(name, number):  
+                            f = 1
+                            for i in range(2, number+1):
+                                print('Task {}: Compute factorial({})'.format(name, i))
+                                await custom_sleep()
+                                f *= i
+                            print('Task {}: factorial({}) is {}\n'.format(name, number, f))
+
+                        start = time.time()  
+                        loop = asyncio.get_event_loop()
+
+                        tasks = [  
+                            asyncio.ensure_future(factorial("A", 3)),
+                            asyncio.ensure_future(factorial("B", 4)),
+                        ]
+                        loop.run_until_complete(asyncio.wait(tasks))  
+                        loop.close()
+
+                        end = time.time()  
+                        print("Total time: {}".format(end - start))
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Asynchronous Sleep</h2>
+                    <pre><code data-trim>
+                        Task A: Compute factorial(2)  
+                        SLEEP 2018-25-06 23:14:40.648665
+
+                        Task B: Compute factorial(2)  
+                        SLEEP 2017-04-06 23:14:40.648859
+
+                        Task A: Compute factorial(3)  
+                        SLEEP 2017-04-06 23:14:41.649564
+
+                        Task B: Compute factorial(3)  
+                        SLEEP 2017-04-06 23:14:41.649943
+
+                        Task A: factorial(3) is 6
+
+                        Task B: Compute factorial(4)  
+                        SLEEP 2017-04-06 23:14:42.651755
+
+                        Task B: factorial(4) is 24
+
+                        Total time: 3.008226156234741
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Suena genial...</h2>
+                    <p>Pero... ¿En qué casos lo uso?</p>
+                    <p class="fragment fade-up">Desarrollo web -> <a href="https://www.github.com/aio-libs">aio-libs</a></p>
+                </section>
+                <section>
+                    <h2>AIO-LIBS</h2>
+                    <ul>
+                        <li><strong>aiohttp:</strong> Microframework HTTP.</li>
+                        <li><strong>aiohttp-devtools:</strong> Herramienta similar al manage de Django.</li>
+                        <li><strong>aiohttp-jinja2:</strong> Sistema de plantillas para aiohttp.</li>
+                        <li><strong>aiohttp-security:</strong> Sistema de autenticación.</li>
+                        <li><strong>aiohttp-debugtoolbar:</strong> Barra de debugeo para aiohttp.</li>
+                        <li><strong>aiohttp-session:</strong> Gestión de sesiones.</li>
+                        <li><strong>aioredis:</strong> Cliente asíncrono para redis.</li>
+                        <li><strong>aiomysql:</strong> Cliente asíncrono para MySQL.</li>
+                        <li><strong>aiopg:</strong> Cliente asíncrono para PostgreSQL.</li>
+                    </ul>
+                </section>
 			</div>
 		</div>
 
